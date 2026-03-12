@@ -1,0 +1,102 @@
+﻿@model WebBanHang_HoaiNam.Models.Product
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-dark text-white">
+            <h3 class="mb-0">Thêm sản phẩm</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Add" enctype="multipart/form-data">
+
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                <div class="row">
+
+                    <!-- Tên sản phẩm -->
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" placeholder="Nhập tên sản phẩm" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <!-- Giá -->
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Price" class="form-label"></label>
+                        <input asp-for="Price" class="form-control" placeholder="Nhập giá sản phẩm" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+
+                    <!-- Danh mục -->
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="CategoryId" class="form-label">Category</label>
+                        <select asp-for="CategoryId"
+                                asp-items="ViewBag.Categories"
+                                class="form-select">
+                        </select>
+                    </div>
+
+                    <!-- Upload ảnh -->
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ImageUrl" class="form-label">Image</label>
+                        <input type="file"
+                               name="ImageUrl"
+                               class="form-control"
+                               onchange="previewImage(event)" />
+                    </div>
+
+                    <!-- Preview ảnh -->
+                    <div class="col-md-12 text-center mb-3">
+                        <img id="preview"
+                             src=""
+                             style="max-height:200px; display:none; border-radius:10px;" />
+                    </div>
+
+                    <!-- Mô tả -->
+                    <div class="col-md-12 mb-3">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Nhập mô tả sản phẩm"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="text-center mt-3">
+
+                    <button type="submit" class="btn btn-success px-4">
+                        Thêm sản phẩm
+                    </button>
+
+                    <a asp-action="Index" class="btn btn-secondary px-4">
+                        Quay lại
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const output = document.getElementById('preview');
+            output.src = reader.result;
+            output.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
