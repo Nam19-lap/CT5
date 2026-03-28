@@ -1,0 +1,67 @@
+﻿@model WebBanHang_HoaiNam.Models.Category
+
+@{
+    ViewData["Title"] = "Xóa danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-danger">
+        <div class="card-header bg-danger text-white">
+            <h4><i class="bi bi-trash"></i> Xóa danh mục</h4>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <h5><i class="bi bi-exclamation-triangle"></i> Cảnh báo</h5>
+                <p>Bạn có chắc chắn muốn xóa danh mục này? Hành động này không thể hoàn tác.</p>
+            </div>
+
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete" class="mt-4">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="d-flex justify-content-start">
+                    <button type="submit" class="btn btn-danger me-2">
+                        <i class="bi bi-trash-fill"></i> Xóa
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Quay lại danh sách
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div class="card border-info">
+            <div class="card-header bg-info text-white">
+                <h5><i class="bi bi-info-circle"></i> Thông tin thêm</h5>
+            </div>
+            <div class="card-body">
+                <p>
+                    Khi bạn xóa một danh mục, tất cả sản phẩm liên quan đến danh mục này
+                    có thể bị ảnh hưởng. Hãy chắc chắn rằng bạn đã kiểm tra kỹ trước khi thực hiện.
+                </p>
+                <ul>
+                    <li>Danh mục sẽ bị xóa khỏi hệ thống.</li>
+                    <li>Sản phẩm liên quan có thể cần được gán lại danh mục khác.</li>
+                    <li>Hành động này không thể hoàn tác.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,69 @@
+﻿@model ShoppingCart
+
+<div class="container mt-4">
+    <h2 class="fw-bold mb-4">🛒 Giỏ hàng của bạn</h2>
+
+    @if (Model.Items == null || !Model.Items.Any())
+    {
+        <div class="alert alert-info">
+            Giỏ hàng trống. Hãy thêm sản phẩm để mua sắm nhé!
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th class="text-center">Số lượng</th>
+                    <th class="text-end">Giá</th>
+                    <th class="text-end">Thành tiền</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <a asp-action="DecreaseQuantity" asp-route-productId="@item.ProductId"
+                                   class="btn btn-sm btn-outline-secondary">-</a>
+                                <span class="mx-2">@item.Quantity</span>
+                                <a asp-action="IncreaseQuantity" asp-route-productId="@item.ProductId"
+                                   class="btn btn-sm btn-outline-secondary">+</a>
+                            </div>
+                        </td>
+                        <td class="text-end">@item.Price.ToString("N0") VND</td>
+                        <td class="text-end">@((item.Price * item.Quantity).ToString("N0")) VND</td>
+                        <td class="text-center">
+                            <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId"
+                               class="btn btn-sm btn-danger">
+                                ❌ Xóa
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end fw-bold">Tổng cộng:</td>
+                    <td class="text-end fw-bold">
+                        @(Model.TotalPrice().ToString("N0")) VND
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="d-flex justify-content-between mt-3">
+            <a asp-controller="Product" asp-action="Index" class="btn btn-secondary">
+                ⬅ Tiếp tục mua sắm
+            </a>
+            <a asp-action="Checkout" class="btn btn-success">
+                ✅ Tới trang thanh toán
+            </a>
+        </div>
+    }
+</div>

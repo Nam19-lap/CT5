@@ -1,7 +1,6 @@
 ﻿@model WebBanHang_HoaiNam.Models.Product
 
 <div class="container mt-5">
-
     <div class="card shadow-lg border-0">
         <div class="row g-0">
 
@@ -23,43 +22,38 @@
 
             <!-- Thông tin sản phẩm -->
             <div class="col-md-7 p-4">
-
                 <h2 class="fw-bold">@Model.Name</h2>
 
                 <h3 class="text-danger mt-3">
                     @Model.Price.ToString("N0") VND
                 </h3>
 
-                <hr />
-
-                <p class="text-muted">
+                <p class="text-muted mt-3">
                     @Model.Description
                 </p>
 
-                <div class="mt-4">
+                <hr />
 
-                    <a asp-action="Index"
-                       class="btn btn-secondary me-2">
-                        ⬅ Back
+                <!-- Nút thao tác -->
+                <div class="mt-4 d-flex">
+                    <a asp-action="Index" class="btn btn-secondary me-2">
+                        ⬅ Quay lại
                     </a>
 
-                    <a asp-action="Update"
-                       asp-route-id="@Model.Id"
-                       class="btn btn-warning me-2">
-                        ✏ Edit
-                    </a>
-
-                    <a asp-action="Delete"
-                       asp-route-id="@Model.Id"
-                       class="btn btn-danger">
-                        🗑 Delete
-                    </a>
-
+                    <form asp-controller="ShoppingCart" asp-action="AddToCart" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <button type="submit" class="btn btn-success">
+                            🛒 Thêm vào giỏ hàng
+                        </button>
+                    </form>
                 </div>
 
+                <!-- Chính sách -->
+                <div class="mt-4">
+                    <h6>🔄 Chính sách đổi trả</h6>
+                    <p>Đổi trả trong vòng 7 ngày nếu sản phẩm lỗi.</p>
+                </div>
             </div>
-
         </div>
     </div>
-
 </div>

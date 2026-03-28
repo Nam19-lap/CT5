@@ -1,0 +1,30 @@
+﻿@model int
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-success">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">✅ Đặt hàng thành công</h4>
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="fw-bold mb-3">Cảm ơn bạn đã mua sắm tại WebBanHang_HoaiNam!</h5>
+                    <p class="fs-5">
+                        Đơn hàng của bạn với mã <span class="fw-bold text-primary">#@Model</span>
+                        đã được ghi nhận thành công.
+                    </p>
+                    <p class="text-muted">Chúng tôi sẽ xử lý và giao hàng trong thời gian sớm nhất.</p>
+
+                    <div class="mt-4">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary me-2">
+                            ⬅ Tiếp tục mua sắm
+                        </a>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-success">
+                            🏠 Về trang chủ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

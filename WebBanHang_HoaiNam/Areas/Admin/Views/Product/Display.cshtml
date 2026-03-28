@@ -1,0 +1,81 @@
+﻿@model WebBanHang_HoaiNam.Models.Product
+
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-info text-white">
+            <h4><i class="bi bi-eye"></i> Thông tin chi tiết sản phẩm</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid img-thumbnail mb-3" style="max-height:300px;" />
+                    }
+                    else
+                    {
+                        <div class="alert alert-secondary">Không có ảnh sản phẩm</div>
+                    }
+                </div>
+                <div class="col-md-8">
+                    <dl class="row">
+                        <dt class="col-sm-4 fw-bold">Tên sản phẩm</dt>
+                        <dd class="col-sm-8">@Model.Name</dd>
+
+                        <dt class="col-sm-4 fw-bold">Giá</dt>
+                        <dd class="col-sm-8">@Model.Price.ToString("N0") đ</dd>
+
+                        <dt class="col-sm-4 fw-bold">Danh mục</dt>
+                        <dd class="col-sm-8">@Model.Category?.Name</dd>
+
+                        <dt class="col-sm-4 fw-bold">Mô tả</dt>
+                        <dd class="col-sm-8">@Model.Description</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="d-flex justify-content-start mt-3">
+                <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+                    <i class="bi bi-pencil-square"></i> Sửa
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger me-2">
+                    <i class="bi bi-trash"></i> Xóa
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Quay lại danh sách
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div class="card border-secondary">
+            <div class="card-header bg-secondary text-white">
+                <h5><i class="bi bi-journal-text"></i> Ghi chú</h5>
+            </div>
+            <div class="card-body">
+                <p>
+                    Đây là thông tin chi tiết của sản phẩm. Bạn có thể chỉnh sửa hoặc xóa sản phẩm nếu cần.
+                </p>
+                <ul>
+                    <li>Ảnh sản phẩm giúp người dùng dễ nhận diện hơn.</li>
+                    <li>Giá sản phẩm được hiển thị theo định dạng tiền tệ Việt Nam.</li>
+                    <li>Danh mục sản phẩm giúp phân loại rõ ràng trong hệ thống.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
