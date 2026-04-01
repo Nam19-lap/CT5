@@ -118,6 +118,11 @@ new ShoppingCart();
             HttpContext.Session.Remove("Cart");
             return View("OrderCompleted", order.Id); // Trang xác nhận hoàn thành đơn hàng
         }
+        public IActionResult GetCartCount()
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart") ?? new ShoppingCart();
+            return Json(cart.TotalQuantity());
+        }
 
     }
 
